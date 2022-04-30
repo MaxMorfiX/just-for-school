@@ -1,0 +1,38 @@
+.field {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border: none;
+    color: gray;
+    background-color: gray;
+    z-index: 0;
+    display: block;
+/*  margin-left: 20px;
+    margin-top: 20px; */
+}
+.player {
+    background-color: red;
+    color: red;
+    z-index: 3;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: block;
+    border: none;
+}
+.coin {
+    background-color: blue;
+    color: blue;
+    z-index: 2;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: block;
+    border: none;
+}
+
+
+
+html, body {
+    overflow: hidden;
+}
