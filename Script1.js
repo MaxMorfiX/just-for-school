@@ -2,6 +2,7 @@ const SEP = '_';
 var field = $('#field');
 var player = $('#player');
 var gamespeed = 10;
+var playerSpeed = 7;
 var playerSize = player.width();
 var coinSize = $('.coin').width();
 var playerH = {};
@@ -66,19 +67,16 @@ function rotatePlayer() {
 }
 
 function checkMove() {
-    if(buttons[38]) {
-        var rot = player.data('rotation');
-        var x = Math.cos((rot + 90)*mult) * 10;
-        var y = Math.sin((rot + 90)*mult) * 10;
-        console.log(x + ' ' + y + ' ' + rot);
-        player.offset({left: player.offset().left - x, top: player.offset().top - y});
-    }
+    var rot = player.data('rotation');
+    var x = Math.cos((rot + 90)*mult) * playerSpeed;
+    var y = Math.sin((rot + 90)*mult) * playerSpeed;
+//    console.log(x + ' ' + y + ' ' + rot);
+    
     if(buttons[40]) {
-        var rot = player.data('rotation');
-        var x = Math.cos((rot + 90)*mult) * 10;
-        var y = Math.sin((rot + 90)*mult) * 10;
-        console.log(x + ' ' + y + ' ' + rot);
-        player.offset({left: player.offset().left + x, top: player.offset().top + y});
+        $('#movingBlocksContainer').offset({left: $('#movingBlocksContainer').offset().left - x, top: $('#movingBlocksContainer').offset().top - y})
+    }
+    if(buttons[38]) {
+        $('#movingBlocksContainer').offset({left: $('#movingBlocksContainer').offset().left + x, top: $('#movingBlocksContainer').offset().top + y})
     }
 }
 
@@ -88,9 +86,9 @@ function checkMove() {
 function create(type, left, bottom) {
     if(type == 'coin') {
         var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
+        $('#movingBlocksContainer').append(html);
     }
 //    console.log(html);
-    field.append(html);
 }
 
 function fitToSize() {
