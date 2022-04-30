@@ -8,10 +8,10 @@ var playerH = {};
 var device;
 var coinCount = 50;
 var buttons = {};
+var mult = Math.PI/180;
 
 document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
-player.data('rotation', 0)
 
 startGame();
 
@@ -19,6 +19,10 @@ function startGame() {
     fitToSize();
     createMap();
     addPlayerHitbox();
+    
+    player.data('rotation', 0)
+    player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
+    
     cycle();
 }
 function createMap() {
@@ -48,16 +52,34 @@ function KeyUp(e) {
 
 function cycle() {
     rotatePlayer();
+    checkMove();
     setTimeout(cycle, gamespeed);
 }
 function rotatePlayer() {
     if(buttons[37]) {
-        player.data('rotation', player.data('rotation') - 1);
+        player.data('rotation', player.data('rotation') - 3);
     }
     if(buttons[39]) {
-        player.data('rotation', player.data('rotation') + 1);
+        player.data('rotation', player.data('rotation') + 3);
     }
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
+}
+
+function checkMove() {
+    if(buttons[38]) {
+        var rot = player.data('rotation');
+        var x = Math.cos((rot + 90)*mult) * 10;
+        var y = Math.sin((rot + 90)*mult) * 10;
+        console.log(x + ' ' + y + ' ' + rot);
+        player.offset({left: player.offset().left - x, top: player.offset().top - y});
+    }
+    if(buttons[40]) {
+        var rot = player.data('rotation');
+        var x = Math.cos((rot + 90)*mult) * 10;
+        var y = Math.sin((rot + 90)*mult) * 10;
+        console.log(x + ' ' + y + ' ' + rot);
+        player.offset({left: player.offset().left + x, top: player.offset().top + y});
+    }
 }
 
 
