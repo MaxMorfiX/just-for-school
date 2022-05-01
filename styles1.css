@@ -51,6 +51,10 @@
     height: 60px;
     border: none;
     display: block;
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
 }
 
 html, body {
