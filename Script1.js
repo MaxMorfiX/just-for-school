@@ -27,6 +27,7 @@ function startGame() {
     
     player.data('rotation', 0)
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
+    $('#scorePlayer1').text(playerScore);
     
     cycle();
 }
@@ -38,6 +39,7 @@ function createMap() {
         create('coin', x, y);
         currCoinPosition['left'] = x;
         currCoinPosition['top'] = y;
+        currCoinPosition['onMap'] = true;
         coinsPositions[i] = currCoinPosition;
     }
 }
@@ -79,7 +81,9 @@ function rotatePlayer() {
 function addCount(number, id) {
     console.log(playerScore + ' + ' + number);
     playerScore = playerScore + number;
-    $('#' + id).remove();
+    $('#scorePlayer1').text(playerScore);
+    coinsPositions[id]['onMap'] = false;
+    $('#coin' + id).remove();
 }
 
 function move() {
@@ -103,6 +107,12 @@ function checkBorderCol() {
     if ($('#mBC').offset().top + 30 > playerH['top']) {
         $('#mBC').offset({top: playerH['top'] - 30});
     }
+    if ($('#mBC').offset().top + mapSize + 30 + playerSize < playerH['bottom']) {
+        $('#mBC').offset({top: playerH['bottom'] - mapSize - playerSize - 30});
+    }
+    if ($('#mBC').offset().left + mapSize + 30 + playerSize < playerH['right']) {
+        $('#mBC').offset({left: playerH['right'] - mapSize - playerSize - 30});
+    }
 }
 
 
@@ -112,23 +122,25 @@ function hitboxCheck(type) {
     
     if (type == 'coin') {
         var i = 1;
-        for (var key in coinsPositions) {
-
-            var left = coinsPositions[key]['left'] + containerL + 30;
-            var top = coinsPositions[key]['top'] + containerT  + 30;
-            var right = left + coinSize;
-            var bottom = top + coinSize;
-            
-            if (left <= playerH['right']) {
-                if (top <= playerH['bottom']) {
-                    if (right >= playerH['left']) {
-                        if (bottom >= playerH['top']) {
-                            addCount(oneCoinPower, 'coin' + key);
+            for (var key in coinsPositions) {
+                if (coinsPositions[key]['onMap']) {
+    
+                var left = coinsPositions[key]['left'] + containerL + 30;
+                var top = coinsPositions[key]['top'] + containerT  + 30;
+                var right = left + coinSize;
+                var bottom = top + coinSize;
+                
+                if (left <= playerH['right']) {
+                    if (top <= playerH['bottom']) {
+                        if (right >= playerH['left']) {
+                            if (bottom >= playerH['top']) {
+                                addCount(oneCoinPower, key);
+                            }
                         }
                     }
                 }
+                i++
             }
-            i++
         }
     }
 }
