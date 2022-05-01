@@ -111,11 +111,11 @@ function hitboxCheck(type) {
     var containerT = $('#mBC').offset().top;
     if (type == 'coin') {
         var i = 1;
-        $('.coin').each(function() {
-            var el = $(this);
+        for (var key in coinsPositions) {
+
             
-            var left = coinsPositions[i]['left'] + containerL;
-            var top = coinsPositions[i]['top'] + containerT;
+            var left = coinsPositions[key]['left'] + containerL;
+            var top = coinsPositions[key]['top'] + containerT;
             var right = left + coinSize;
             var bottom = top + coinSize;
             
@@ -123,13 +123,13 @@ function hitboxCheck(type) {
                 if (top <= playerH['bottom']) {
                     if (right >= playerH['left']) {
                         if (bottom >= playerH['top']) {
-                            addCount(oneCoinPower, el.attr('id'));
+                            addCount(oneCoinPower, 'coin' + key);
                         }
                     }
                 }
             }
             i++
-        });
+        }
     }
 }
 
