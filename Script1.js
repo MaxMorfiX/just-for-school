@@ -3,8 +3,9 @@ var field = $('#field');
 var player = $('#player');
 var gamespeed = 10;
 var playerSpeed = 7;
-var playerSize = player.width();
-var coinSize = $('.coin').width();
+var playerSize = 50;
+var coinSize = 50;
+var mapSize = 2000;
 var playerH = {};
 var device;
 var coinCount = 50;
@@ -28,8 +29,8 @@ function startGame() {
 }
 function createMap() {
     for(i = 1; i <= coinCount; i++) {
-        var x = Math.floor(Math.random() * 2000);
-        var y = Math.floor(Math.random() * 2000);
+        var x = Math.floor((Math.random()) * 2000);
+        var y = Math.floor((Math.random()) * 2000);
         create('coin', x, y);
     }
 }
@@ -53,7 +54,8 @@ function KeyUp(e) {
 
 function cycle() {
     rotatePlayer();
-    checkMove();
+    move();
+    checkBorderCol();
     setTimeout(cycle, gamespeed);
 }
 function rotatePlayer() {
@@ -66,27 +68,33 @@ function rotatePlayer() {
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
 }
 
-function checkMove() {
+function move() {
     var rot = player.data('rotation');
     var x = Math.cos((rot + 90)*mult) * playerSpeed;
     var y = Math.sin((rot + 90)*mult) * playerSpeed;
 //    console.log(x + ' ' + y + ' ' + rot);
-    
     if(buttons[40]) {
-        $('#movingBlocksContainer').offset({left: $('#movingBlocksContainer').offset().left - x, top: $('#movingBlocksContainer').offset().top - y})
+        $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y})
     }
     if(buttons[38]) {
-        $('#movingBlocksContainer').offset({left: $('#movingBlocksContainer').offset().left + x, top: $('#movingBlocksContainer').offset().top + y})
+        $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y})
     }
 }
-
+function checkBorderCol() {
+    if($('#mBC').offset().left + 30 > playerH['left']) {
+        $('#mBC').offset({left: playerH['left'] - 30});
+    }
+    if($('#mBC').offset().top + 30 > playerH['top']) {
+        $('#mBC').offset({top: playerH['top'] - 30});
+    }
+}
 
 
 
 function create(type, left, bottom) {
     if(type == 'coin') {
         var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
-        $('#movingBlocksContainer').append(html);
+        $('#mBC').append(html);
     }
 //    console.log(html);
 }
@@ -96,6 +104,7 @@ function fitToSize() {
     var x = window.innerWidth - 20;
     console.log(x + 'px by ' + y + 'px');
     field.width(x).height(y);
+    $('#mBC').width(mapSize + coinSize).height(mapSize + coinSize);
     player.offset({left: field.width()/2 - playerSize/2, top: field.height()/2 - playerSize/2});
 }
 function getDevice() {

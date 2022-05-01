@@ -11,6 +11,8 @@
     margin-top: 20px; */
 }
 .player {
+    background: url('textures/player.png');
+    background-size: 100% 100%;
     background-color: red;
     color: red;
     z-index: 3;
@@ -21,6 +23,8 @@
     border: none;
 }
 .coin {
+    background: url('textures/coin.png');
+    background-size: 100% 100%;
     background-color: blue;
     color: blue;
     z-index: 2;
@@ -34,10 +38,12 @@
     position: absolute;
     width: 500px;
     height: 500px;
-    border: none;
+    border-width: 30px;
+    border-style: solid;
+    border-color: yellow;
     z-index: 0;
     display: block;
-    background-color: none;
+    background-color: transparent;
 }
 
 
