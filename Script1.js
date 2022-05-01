@@ -106,18 +106,18 @@ function hitboxCheck(type) {
     var containerT = $('#mBC').offset().top;
     if (type === 'coin') {
         $('.coin').each(function() {
+            var el = $(this);
             
-            var left = this.offsetLeft + containerL;
-            var top = this.offsetTop + containerT;
+            var left = el.offset().left;
+            var top = el.offset().top;
             var right = left + coinSize;
             var bottom = top + coinSize;
             
-            
-            if(left <= playerH['right']) {
-                if(top >= playerH['bottom']) {
-                    if(right >= playerH['left']) {
-                        if(bottom <= playerH['top']) {
-                            addCount(oneCoinPower, thisJQ.attr('id'));
+            if (left <= playerH['right']) {
+                if (top <= playerH['bottom']) {
+                    if (right >= playerH['left']) {
+                        if (bottom >= playerH['top']) {
+                            addCount(oneCoinPower, el.attr('id'));
                         }
                     }
                 }
