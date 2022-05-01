@@ -11,6 +11,8 @@ var device;
 var coinCount = 50;
 var buttons = {};
 var mult = Math.PI/180;
+var playerScore = 0;
+var oneCoinPower = 1;
 
 document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
@@ -53,6 +55,7 @@ function KeyUp(e) {
 }
 
 function cycle() {
+    hitboxCheck('coin');
     rotatePlayer();
     move();
     checkBorderCol();
@@ -68,15 +71,23 @@ function rotatePlayer() {
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
 }
 
+function addCount(number, id) {
+    console.log(playerScore + ' + ' + number);
+    playerScore = playerScore + number;
+    $('#' + id).remove();
+}
+
 function move() {
     var rot = player.data('rotation');
-    var x = Math.cos((rot + 90)*mult) * playerSpeed;
-    var y = Math.sin((rot + 90)*mult) * playerSpeed;
 //    console.log(x + ' ' + y + ' ' + rot);
     if(buttons[40]) {
+        var x = Math.cos((rot + 90)*mult) * playerSpeed;
+        var y = Math.sin((rot + 90)*mult) * playerSpeed;
         $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y})
     }
     if(buttons[38]) {
+        var x = Math.cos((rot + 90)*mult) * playerSpeed;
+        var y = Math.sin((rot + 90)*mult) * playerSpeed;
         $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y})
     }
 }
@@ -90,14 +101,34 @@ function checkBorderCol() {
 }
 
 
-
-function create(type, left, bottom) {
+function hitboxCheck(type) {
+    var containerL = $('#mBC').offset().left
+    var containerT = $('#mBC').offset().top
     if(type == 'coin') {
-        var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
-        $('#mBC').append(html);
+        $('.coin').each(function() {
+            
+            var left = this.offsetLeft + containerL;
+            var top = this.offsetTop + containerT;
+            var right = left + coinSize;
+            var bottom = top + coinSize;
+            
+            
+            if(left <= playerH['right']) {
+                if(top >= playerH['bottom']) {
+                    if(right >= playerH['left']) {
+                        if(bottom <= playerH['top']) {
+                            addCount(oneCoinPower, thisJQ.attr('id'));
+                        }
+                    }
+                }
+            }
+        });
     }
-//    console.log(html);
 }
+
+
+
+
 
 function fitToSize() {
     var y = window.innerHeight - 20;
@@ -120,4 +151,12 @@ function getDevice() {
         device = 'pc';
     }
     console.log(device);
+}
+
+function create(type, left, bottom) {
+    if(type == 'coin') {
+        var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
+        $('#mBC').append(html);
+    }
+//    console.log(html);
 }

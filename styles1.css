@@ -44,7 +44,14 @@
     display: block;
     background-color: transparent;
 }
-
+.playerScore {
+    position: absolute;
+    z-index: 4;
+    width: 160px;
+    height: 60px;
+    border: none;
+    display: block;
+}
 
 html, body {
     overflow: hidden;
