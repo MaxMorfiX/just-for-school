@@ -109,13 +109,13 @@ function checkBorderCol() {
 function hitboxCheck(type) {
     var containerL = $('#mBC').offset().left;
     var containerT = $('#mBC').offset().top;
+    
     if (type == 'coin') {
         var i = 1;
         for (var key in coinsPositions) {
 
-            
-            var left = coinsPositions[key]['left'] + containerL;
-            var top = coinsPositions[key]['top'] + containerT;
+            var left = coinsPositions[key]['left'] + containerL + 30;
+            var top = coinsPositions[key]['top'] + containerT  + 30;
             var right = left + coinSize;
             var bottom = top + coinSize;
             
