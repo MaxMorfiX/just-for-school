@@ -1,7 +1,7 @@
 const SEP = '_';
 var field = $('#field');
 var player = $('#player');
-var gamespeed = 10;
+var gamespeed = 15;
 var playerSpeed = 7;
 var playerSize = 50;
 var coinSize = 50;
@@ -13,6 +13,7 @@ var buttons = {};
 var mult = Math.PI/180;
 var playerScore = 0;
 var oneCoinPower = 1;
+var coinsPositions = {}
 
 document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
@@ -31,9 +32,13 @@ function startGame() {
 }
 function createMap() {
     for (i = 1; i <= coinCount; i++) {
+        var currCoinPosition = {};
         var x = Math.floor((Math.random()) * 2000);
         var y = Math.floor((Math.random()) * 2000);
         create('coin', x, y);
+        currCoinPosition['left'] = x;
+        currCoinPosition['top'] = y;
+        coinsPositions[i] = currCoinPosition;
     }
 }
 function addPlayerHitbox() {
@@ -104,12 +109,13 @@ function checkBorderCol() {
 function hitboxCheck(type) {
     var containerL = $('#mBC').offset().left;
     var containerT = $('#mBC').offset().top;
-    if (type === 'coin') {
+    if (type == 'coin') {
+        var i = 1;
         $('.coin').each(function() {
             var el = $(this);
             
-            var left = el.offset().left;
-            var top = el.offset().top;
+            var left = coinsPositions[i]['left'] + containerL;
+            var top = coinsPositions[i]['top'] + containerT;
             var right = left + coinSize;
             var bottom = top + coinSize;
             
@@ -122,6 +128,7 @@ function hitboxCheck(type) {
                     }
                 }
             }
+            i++
         });
     }
 }
@@ -153,9 +160,9 @@ function getDevice() {
     console.log(device);
 }
 
-function create(type, left, bottom) {
+function create(type, left, top) {
     if (type == 'coin') {
-        var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
+        var html = `<div id='coin${i}' class='coin' style='left: ${left}px; top: ${top}px'>`;
         $('#mBC').append(html);
     }
 //    console.log(html);
