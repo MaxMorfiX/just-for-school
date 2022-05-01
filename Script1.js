@@ -30,7 +30,7 @@ function startGame() {
     cycle();
 }
 function createMap() {
-    for(i = 1; i <= coinCount; i++) {
+    for (i = 1; i <= coinCount; i++) {
         var x = Math.floor((Math.random()) * 2000);
         var y = Math.floor((Math.random()) * 2000);
         create('coin', x, y);
@@ -39,8 +39,8 @@ function createMap() {
 function addPlayerHitbox() {
     playerH['left'] = player.offset().left;
     playerH['top'] = player.offset().top;
-    playerH['right'] = playerH['left'] - playerSize;
-    playerH['bottom'] = playerH['top'] - playerSize;
+    playerH['right'] = playerH['left'] + playerSize;
+    playerH['bottom'] = playerH['top'] + playerSize;
 }
 
 function KeyDown(e){
@@ -48,7 +48,7 @@ function KeyDown(e){
 //   console.log (buttons);
 }
 function KeyUp(e) {
-    if(buttons[e.which]) {
+    if (buttons[e.which]) {
     buttons[e.which] = false;
 //    console.log (buttons);
     }
@@ -62,10 +62,10 @@ function cycle() {
     setTimeout(cycle, gamespeed);
 }
 function rotatePlayer() {
-    if(buttons[37]) {
+    if (buttons[37]) {
         player.data('rotation', player.data('rotation') - 3);
     }
-    if(buttons[39]) {
+    if (buttons[39]) {
         player.data('rotation', player.data('rotation') + 3);
     }
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
@@ -80,31 +80,31 @@ function addCount(number, id) {
 function move() {
     var rot = player.data('rotation');
 //    console.log(x + ' ' + y + ' ' + rot);
-    if(buttons[40]) {
+    if (buttons[40]) {
         var x = Math.cos((rot + 90)*mult) * playerSpeed;
         var y = Math.sin((rot + 90)*mult) * playerSpeed;
         $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y})
     }
-    if(buttons[38]) {
+    if (buttons[38]) {
         var x = Math.cos((rot + 90)*mult) * playerSpeed;
         var y = Math.sin((rot + 90)*mult) * playerSpeed;
         $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y})
     }
 }
 function checkBorderCol() {
-    if($('#mBC').offset().left + 30 > playerH['left']) {
+    if ($('#mBC').offset().left + 30 > playerH['left']) {
         $('#mBC').offset({left: playerH['left'] - 30});
     }
-    if($('#mBC').offset().top + 30 > playerH['top']) {
+    if ($('#mBC').offset().top + 30 > playerH['top']) {
         $('#mBC').offset({top: playerH['top'] - 30});
     }
 }
 
 
 function hitboxCheck(type) {
-    var containerL = $('#mBC').offset().left
-    var containerT = $('#mBC').offset().top
-    if(type == 'coin') {
+    var containerL = $('#mBC').offset().left;
+    var containerT = $('#mBC').offset().top;
+    if (type === 'coin') {
         $('.coin').each(function() {
             
             var left = this.offsetLeft + containerL;
@@ -154,7 +154,7 @@ function getDevice() {
 }
 
 function create(type, left, bottom) {
-    if(type == 'coin') {
+    if (type == 'coin') {
         var html = `<div id='coin${i}' class='coin' style='left: ${left}px; bottom: ${bottom}px'>`;
         $('#mBC').append(html);
     }
