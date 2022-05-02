@@ -9,11 +9,14 @@ var mapSize = 2000;
 var playerH = {};
 var device;
 var coinCount = 50;
+var fakeCoinCount = 10;
 var buttons = {};
 var mult = Math.PI/180;
 var playerScore = 0;
 var oneCoinPower = 1;
+var oneFakeCoinPower = -1;
 var coinsPositions = {}
+var fakeCoinsPositions = {}
 
 document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
@@ -42,6 +45,16 @@ function createMap() {
         currCoinPosition['onMap'] = true;
         coinsPositions[i] = currCoinPosition;
     }
+    for (i = 1; i <= fakeCoinCount; i++) {
+        var currCoinPosition = {};
+        var x = Math.floor((Math.random()) * 2000);
+        var y = Math.floor((Math.random()) * 2000);
+        create('fakeCoin', x, y);
+        currCoinPosition['left'] = x;
+        currCoinPosition['top'] = y;
+        currCoinPosition['onMap'] = true;
+        fakeCoinsPositions[i] = currCoinPosition;
+    }
 }
 function addPlayerHitbox() {
     playerH['left'] = player.offset().left;
@@ -62,7 +75,6 @@ function KeyUp(e) {
 }
 
 function cycle() {
-    hitboxCheck('coin');
     rotatePlayer();
     move();
     checkBorderCol();
@@ -85,6 +97,13 @@ function addCount(number, id) {
     coinsPositions[id]['onMap'] = false;
     $('#coin' + id).remove();
 }
+function increaceCount(number, id) {
+    console.log(playerScore + ' ' + number);
+    playerScore = playerScore + number;
+    $('#scorePlayer1').text(playerScore);
+    fakeCoinsPositions[id]['onMap'] = false;
+    $('#fakeCoin' + id).remove();
+}
 
 function move() {
     var rot = player.data('rotation');
@@ -98,6 +117,10 @@ function move() {
         var x = Math.cos((rot + 90)*mult) * playerSpeed;
         var y = Math.sin((rot + 90)*mult) * playerSpeed;
         $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y})
+    }
+    if (buttons[40] || buttons[38]) {
+        hitboxCheck('coin');
+        hitboxCheck('fakeCoin');
     }
 }
 function checkBorderCol() {
@@ -143,6 +166,29 @@ function hitboxCheck(type) {
             }
         }
     }
+    if (type == 'fakeCoin') {
+        var i = 1;
+            for (var key in fakeCoinsPositions) {
+                if (fakeCoinsPositions[key]['onMap']) {
+    
+                var left = fakeCoinsPositions[key]['left'] + containerL + 30;
+                var top = fakeCoinsPositions[key]['top'] + containerT  + 30;
+                var right = left + coinSize;
+                var bottom = top + coinSize;
+                
+                if (left <= playerH['right']) {
+                    if (top <= playerH['bottom']) {
+                        if (right >= playerH['left']) {
+                            if (bottom >= playerH['top']) {
+                                increaceCount(oneFakeCoinPower, key);
+                            }
+                        }
+                    }
+                }
+                i++
+            }
+        }
+    }
 }
 
 
@@ -175,6 +221,10 @@ function getDevice() {
 function create(type, left, top) {
     if (type == 'coin') {
         var html = `<div id='coin${i}' class='coin' style='left: ${left}px; top: ${top}px'>`;
+        $('#mBC').append(html);
+    }
+    if (type == 'fakeCoin') {
+        var html = `<div id='fakeCoin${i}' class='fakeCoin' style='left: ${left}px; top: ${top}px'>`;
         $('#mBC').append(html);
     }
 //    console.log(html);
