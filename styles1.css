@@ -67,6 +67,15 @@
     text-align: center;
     font-weight: bold;
 }
+.decoration {
+    color: red;
+    z-index: 1;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: none;
+}
 
 html, body {
     overflow: hidden;

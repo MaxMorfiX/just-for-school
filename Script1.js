@@ -10,13 +10,14 @@ var playerH = {};
 var device;
 var coinCount = 50;
 var fakeCoinCount = 10;
+var decorationsCount = 100;
 var buttons = {};
 var mult = Math.PI/180;
 var playerScore = 0;
 var oneCoinPower = 1;
 var oneFakeCoinPower = -1;
-var coinsPositions = {}
-var fakeCoinsPositions = {}
+var coinsPositions = {};
+var fakeCoinsPositions = {};
 
 document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
@@ -54,6 +55,12 @@ function createMap() {
         currCoinPosition['top'] = y;
         currCoinPosition['onMap'] = true;
         fakeCoinsPositions[i] = currCoinPosition;
+    }
+    for (i = 1; i <= decorationsCount; i++) {
+        var x = Math.floor((Math.random()) * 2001);
+        var y = Math.floor((Math.random()) * 2001);
+        var type = Math.floor((Math.random()) * 4);
+        create('grass' + type, x, y);
     }
 }
 function addPlayerHitbox() {
@@ -221,11 +228,12 @@ function getDevice() {
 function create(type, left, top) {
     if (type == 'coin') {
         var html = `<div id='coin${i}' class='coin' style='left: ${left}px; top: ${top}px'>`;
-        $('#mBC').append(html);
-    }
-    if (type == 'fakeCoin') {
+    } else if (type == 'fakeCoin') {
         var html = `<div id='fakeCoin${i}' class='fakeCoin' style='left: ${left}px; top: ${top}px'>`;
-        $('#mBC').append(html);
+    } else {
+        var html = `<div id='dec${i}' class='decoration' style='background: url("textures/${type}.png"); background-size: 100% 100%; left: ${left}px; top: ${top}px'>`;
+        console.log(html);
     }
+    $('#mBC').append(html);
 //    console.log(html);
 }
