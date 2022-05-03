@@ -10,11 +10,18 @@
     <div id='field' class='field'>
         <div id='player' class='player'></div>
         <div id='mBC' class='movingBlocksContainer'></div>
+        
+        
+        
         <div id='scorePlayer1' class='playerScore' style='right: 5px; top: 5px; background-color: red;'></div>
+        <div id='left' class='LRButtons' ontouchstart='buttons[37] = true;' ontouchend='buttons[37] = false;' style='background: url("textures/left.png"); background-size: 100% 100%;'></div>
+        <div id='right' class='LRButtons' ontouchstart='buttons[39] = true;' ontouchend='buttons[39] = false;' style='background: url("textures/right.png"); background-size: 100% 100%;'></div>
+        <div id='up' class='UDButtons' ontouchstart='buttons[38] = true;' ontouchend='buttons[38] = false;' style='background: url("textures/up.png"); background-size: 100% 100%;'></div>
+        <div id='down' class='UDButtons' ontouchstart='buttons[40] = true;' ontouchend='buttons[40] = false;' style='background: url("textures/down.png"); background-size: 100% 100%;'></div>
     </div>
     
     <script type="text/javascript" src="cdn_modules/jquery@3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src='Script1.js'></script>
+    <script type="text/javascript" src='script.js'></script>
 </body>
 
 </html>

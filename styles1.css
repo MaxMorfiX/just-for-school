@@ -76,6 +76,26 @@
     display: block;
     border: none;
 }
+.LRButtons {
+    position: absolute;
+    width: 150px;
+    height: 90px;
+    border: 10px;
+    background-color: black;
+    z-index: 7;
+    opacity: 0.5;
+    display: none;
+}
+.UDButtons {
+    position: absolute;
+    width: 150px;
+    height: 90px;
+    border: 10px;
+    background-color: black;
+    z-index: 7;
+    opacity: 0.5;
+    display: none;
+}
 
 html, body {
     overflow: hidden;
