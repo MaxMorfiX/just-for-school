@@ -67,10 +67,11 @@ function startMapFunctions() {
     $('#scorePlayer1').text(player1Score);
     $('#scorePlayer2').text(player2Score);
     if (currPlayer == 1) {
-        player.css('background', "url('/textures/player1.png')").css('background-size', '100% 100%');
+        player.css('background', "url('/textures/player1.png')");
     } else {
-        player.css('background', "url('/textures/player2.png')").css('background-size', '100% 100%');
+        player.css('background', "url('/textures/player2.png')");
     }
+    player.css('background-size', '100% 100%');
     if (device == 'phone') {
         $('#left').show();
         $('#right').show();
