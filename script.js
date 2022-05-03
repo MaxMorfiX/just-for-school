@@ -27,6 +27,7 @@ document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
 
 
+addPlayerHitbox();
 getDevice();
 fitToSize();
 start();
@@ -58,7 +59,6 @@ function start() {
 }
 
 function startMapFunctions() {
-    addPlayerHitbox();
     createMap();
     $('#mBC').offset({top: -(mapSize/3), left: -(mapSize/3)});
     player.data('rotation', 0).show();
