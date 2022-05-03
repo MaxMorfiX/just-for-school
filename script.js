@@ -61,7 +61,8 @@ function start() {
 function startMapFunctions() {
     createMap();
     $('#mBC').offset({top: -(mapSize/3), left: -(mapSize/3)});
-    player.data('rotation', 0).show();
+    player.data('rotation', 0);
+    player.show();
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
     $('#scorePlayer1').text(player1Score);
     $('#scorePlayer2').text(player2Score);
