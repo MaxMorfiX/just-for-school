@@ -27,9 +27,9 @@ document.addEventListener('keydown', KeyDown);
 document.addEventListener('keyup', KeyUp);
 
 
-addPlayerHitbox();
 getDevice();
 fitToSize();
+addPlayerHitbox();
 start();
 
 function start() {
