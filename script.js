@@ -67,9 +67,9 @@ function startMapFunctions() {
     $('#scorePlayer1').text(player1Score);
     $('#scorePlayer2').text(player2Score);
     if (currPlayer == 1) {
-        player.css('background', "url('/textures/player1.png')");
+        player.css('background', "url('/textures/player1.png') 100% 100%");
     } else {
-        player.css('background', "url('/textures/player2.png')");
+        player.css('background', "url('/textures/player2.png') 100% 100%");
     }
     player.css('background-size', '100% 100%');
     if (device == 'phone') {
