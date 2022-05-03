@@ -96,6 +96,18 @@
     opacity: 0.5;
     display: none;
 }
+.time {
+    position: absolute;
+    z-index: 7;
+    width: 500px;
+    height: 60px;
+    border: none;
+    display: block;
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
 
 html, body {
     overflow: hidden;
