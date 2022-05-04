@@ -11,7 +11,7 @@
     margin-top: 20px; */
 }
 .player {
-    background: url('textures/player.png');
+    background: url('textures/player.png?asset=1');
     background-size: 100% 100%;
     background-color: red;
     color: red;
@@ -23,7 +23,7 @@
     border: none;
 }
 .coin {
-    background: url('textures/coin.png');
+    background: url('textures/coin.png?asset=1');
     background-size: 100% 100%;
     color: blue;
     z-index: 2;
@@ -34,7 +34,7 @@
     border: none;
 }
 .fakeCoin {
-    background: url('textures/fakeCoin.png');
+    background: url('textures/fakeCoin.png?asset=1');
     background-size: 100% 100%;
     color: blue;
     z-index: 2;

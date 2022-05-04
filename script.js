@@ -1,3 +1,4 @@
+const asset = 1;
 const SEP = '_';
 var field = $('#field');
 var player = $('#player');
@@ -323,7 +324,7 @@ function create(type, left, top) {
     } else if (type == 'fakeCoin') {
         var html = `<div id='fakeCoin${i}' class='fakeCoin' style='left: ${left}px; top: ${top}px'>`;
     } else {
-        var html = `<div id='dec${i}' class='decoration' style='background: url("textures/${type}.png"); background-size: 100% 100%; left: ${left}px; top: ${top}px'>`;
+        var html = `<div id='dec${i}' class='decoration' style='background: url("textures/${type}.png?asset=${asset}"); background-size: 100% 100%; left: ${left}px; top: ${top}px'>`;
     }
     $('#mBC').append(html);
     //    console.log(html);
