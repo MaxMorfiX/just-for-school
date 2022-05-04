@@ -443,10 +443,10 @@ function createObject(type, left, bottom) {
 }
 
 function save() {
-    localStorage.setItem('map', JSON.stringify(mapObj));
+    localStorage.setItem('Map', JSON.stringify(mapObj));
 }
 function load() {
-    var map = JSON.parse(localStorage.getItem('map'));
+    var map = JSON.parse(localStorage.getItem('Map'));
     for (var key in map) {
         var parts = key.split(SEPARATOR);
         if (parts.length !== 2) {
