@@ -51,7 +51,7 @@ function start() {
         setTimeout(go, 1000);
     }
     function go() {
-        $('#timeOut').text('GO');
+        $('#timeOut').text('GO!');
         setTimeout(startGame, 1000);
     }
     
@@ -83,7 +83,7 @@ function startGame() {
     $('#time').show();
     $('timeOut').text();
     $('#timeOut').hide();
-
+    
     cycle();
 }
 
