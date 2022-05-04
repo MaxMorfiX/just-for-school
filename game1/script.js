@@ -300,7 +300,7 @@ function gameEnd() {
 
 function gameEndCycle() {
     $('.playerScore').width($('.playerScore').width()*1.01).height($('.playerScore').height()*1.01);
-    $('.playerScore').css('font-size', $('.playerScore').height() - iForGameEnd*0.3 - 8).css('text-align', 'center');
+    $('.playerScore').css('font-size', $('.playerScore').height() - iForGameEnd*0.3 - 9).css('text-align', 'center');
     $('#mBC, .player, #time').css('opacity', `${100 - iForGameEnd}%`);
     $('.LRButtons, .UDButtons').css('opacity', `${50 - iForGameEnd/2}%`);
     $('#gameResult').css('opacity', `${iForGameEnd}%`);
