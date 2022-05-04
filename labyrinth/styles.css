@@ -18,6 +18,7 @@
     z-index: 3;
     border: none;
     background: url('textures/player.png');
+    background-size: 100% 100%;
 }
 .block {
     position: absolute;
@@ -57,6 +58,7 @@
     background-color: black;
     display: none;
     background: url('textures/play.png');
+    background-size: 100% 100%;
 }
 .blockNet {
     position: absolute;

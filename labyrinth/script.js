@@ -45,6 +45,7 @@ function startGame() {
         live = true;
         player.style.left = '30px';
         player.style.bottom = '210px';
+        $('#player').css('transform', 'rotate(0deg)')
 //        console.log ('ggame start' + gamemode);
         addHitboxJquery();
         addFieldHitbox();
@@ -182,6 +183,7 @@ function cycle() {
 }
 
 function moveRight() {
+    $('#player').css('transform', 'rotate(90deg)');
     if (hitboxCheck('right')) {
         return;
     }
@@ -190,6 +192,7 @@ function moveRight() {
     player.style.left = (posLeft + xsp) + "px";
 }
 function moveLeft() {
+    $('#player').css('transform', 'rotate(270deg)');
     if (hitboxCheck('left')) {
         return;
     }
@@ -198,6 +201,8 @@ function moveLeft() {
     player.style.left = (posLeft - xsp) + "px";
 }
 function moveDown() {
+    $('#player').css('transform', 'rotate(180deg)');
+    
     if (hitboxCheck('bottom')) {
         return;
     }
@@ -205,6 +210,8 @@ function moveDown() {
     player.style.bottom = (posBottom - xsp) + "px";
 }
 function moveTop() {
+    $('#player').css('transform', 'rotate(0deg)');
+    
     if (hitboxCheck('top')) {
         return;
     }
