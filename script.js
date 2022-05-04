@@ -66,11 +66,7 @@ function startMapFunctions() {
     player.css('transform', 'rotate(' + player.data('rotation') + 'deg)');
     $('#scorePlayer1').text(player1Score);
     $('#scorePlayer2').text(player2Score);
-    if (currPlayer == 1) {
-        player.css('background', "url('textures/player1.png') 100% 100%");
-    } else {
-        player.css('background', "url('textures/player2.png') 100% 100%");
-    }
+    player.css('background', `url('textures/player${currPlayer}.png') 100% 100%`);
     player.css('background-size', '100% 100%');
     if (device == 'phone') {
         $('#left').show();
@@ -297,7 +293,7 @@ function fitToSize() {
     console.log(x + 'px by ' + y + 'px');
     field.width(x).height(y);
     $('#time').width(x);
-    $('#timeOut').width(x).height(y);
+    $('#timeOut').width(x);
     $('#left').offset({ left: 100, top: field.height() - 200 });
     $('#right').offset({ left: 270, top: field.height() - 200 });
     $('#up').offset({ left: field.width() - 350, top: field.height() - 300 });
