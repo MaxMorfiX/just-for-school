@@ -1,5 +1,6 @@
 const asset = 1;
 const SEP = '_';
+var mult = Math.PI / 180;
 var field = $('#field');
 var player = $('#player');
 var iForGameEnd = 0;
@@ -8,12 +9,11 @@ var playerSpeed = 7;
 var playerSize = 45;
 var coinSize = 50;
 var mapSize = 2000;
-var playTime = 10;
+var playTime = 15;
 var device;
 var coinCount = 50;
 var fakeCoinCount = 10;
 var decorationsCount = 100;
-var mult = Math.PI / 180;
 var oneCoinPower = 1;
 var oneFakeCoinPower = -3;
 var time = playTime;
@@ -300,7 +300,7 @@ function gameEnd() {
 
 function gameEndCycle() {
     $('.playerScore').width($('.playerScore').width()*1.01).height($('.playerScore').height()*1.01);
-    $('.playerScore').css('font-size', $('.playerScore').height() - iForGameEnd*0.3 - 10).css('text-align', 'center');
+    $('.playerScore').css('font-size', $('.playerScore').height() - iForGameEnd*0.3 - 8).css('text-align', 'center');
     $('#mBC, .player, #time').css('opacity', `${100 - iForGameEnd}%`);
     $('.LRButtons, .UDButtons').css('opacity', `${50 - iForGameEnd/2}%`);
     $('#gameResult').css('opacity', `${iForGameEnd}%`);
