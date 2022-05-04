@@ -2,6 +2,7 @@ const asset = 1;
 const SEP = '_';
 var field = $('#field');
 var player = $('#player');
+var iForGameEnd = 0;
 var gamespeed = 15;
 var playerSpeed = 7;
 var playerSize = 45;
@@ -187,12 +188,12 @@ function move() {
     if (buttons[40]) {
         var x = Math.cos((rot + 90) * mult) * playerSpeed;
         var y = Math.sin((rot + 90) * mult) * playerSpeed;
-        $('#mBC').offset({ left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y })
+        $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y })
     }
     if (buttons[38]) {
         var x = Math.cos((rot + 90) * mult) * playerSpeed;
         var y = Math.sin((rot + 90) * mult) * playerSpeed;
-        $('#mBC').offset({ left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y })
+        $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y })
     }
     if (buttons[40] || buttons[38]) {
         hitboxCheck('coin');
@@ -202,16 +203,16 @@ function move() {
 
 function checkBorderCol() {
     if ($('#mBC').offset().left + 30 > playerH['left']) {
-        $('#mBC').offset({ left: playerH['left'] - 30 });
+        $('#mBC').offset({left: playerH['left'] - 30 });
     }
     if ($('#mBC').offset().top + 30 > playerH['top']) {
-        $('#mBC').offset({ top: playerH['top'] - 30 });
+        $('#mBC').offset({top: playerH['top'] - 30 });
     }
     if ($('#mBC').offset().top + mapSize + 30 + playerSize < playerH['bottom']) {
-        $('#mBC').offset({ top: playerH['bottom'] - mapSize - playerSize - 30 });
+        $('#mBC').offset({top: playerH['bottom'] - mapSize - playerSize - 30 });
     }
     if ($('#mBC').offset().left + mapSize + 30 + playerSize < playerH['right']) {
-        $('#mBC').offset({ left: playerH['right'] - mapSize - playerSize - 30 });
+        $('#mBC').offset({left: playerH['right'] - mapSize - playerSize - 30 });
     }
 }
 
@@ -271,20 +272,44 @@ function hitboxCheck(type) {
 
 
 function checkGameEnd() {
-    if(time <= 0) {
+    if(time <= 0.1) {
         time = playTime;
         if(currPlayer == 1) {
             currPlayer = 2;
             $('.coin, .fakeCoin, .decoration').remove();
             start();
         } else {
-            
+            gameEnd();
         }
             return true;
     }
 }
 
+function gameEnd() {
+    if(player1Score > player2Score) {
+        $('#gameResult').css('background', `url('textures/pl1won.png') 100% 100%`);
+    } else if(player2Score > player1Score) {
+        $('#gameResult').css('background', `url('textures/pl2won.png') 100% 100%`);
+    } else if(player1Score == player2Score) {
+        $('#gameResult').css('background', `url('textures/deadHeat.png') 100% 100%`);
+    }
+    $('#gameResult').css('background-size', '100% 100%').css('opacity', '0%');
+    gameEndCycle();
+}
 
+
+function gameEndCycle() {
+    $('.playerScore').width($('.playerScore').width()*1.01).height($('.playerScore').height()*1.01);
+    $('.playerScore').css('font-size', $('.playerScore').height() - iForGameEnd*0.3 - 10).css('text-align', 'center');
+    $('#mBC, .player, #time').css('opacity', `${100 - iForGameEnd}%`);
+    $('.LRButtons, .UDButtons').css('opacity', `${50 - iForGameEnd/2}%`);
+    $('#gameResult').css('opacity', `${iForGameEnd}%`);
+    console.log(iForGameEnd);
+    if(iForGameEnd <= 100) {
+        setTimeout(gameEndCycle, 15);
+    }
+    iForGameEnd++;
+}
 
 
 
@@ -293,14 +318,14 @@ function fitToSize() {
     var x = window.innerWidth - 10;
     console.log(x + 'px by ' + y + 'px');
     field.width(x).height(y);
-    $('#time').width(x);
-    $('#timeOut').width(x);
-    $('#left').offset({ left: 100, top: field.height() - 200 });
-    $('#right').offset({ left: 270, top: field.height() - 200 });
-    $('#up').offset({ left: field.width() - 350, top: field.height() - 300 });
-    $('#down').offset({ left: field.width() - 350, top: field.height() - 200 });
+    $('.time').width(x);
+    $('#left').offset({left: 100, top: field.height() - 200 });
+    $('#right').offset({left: 270, top: field.height() - 200 });
+    $('#up').offset({left: field.width() - 350, top: field.height() - 300 });
+    $('#down').offset({left: field.width() - 350, top: field.height() - 200 });
     $('#mBC').width(mapSize + coinSize).height(mapSize + coinSize);
-    player.offset({ left: field.width() / 2 - playerSize / 2, top: field.height() / 2 - playerSize / 2 });
+    $('#gameResult').height(90).width(700).offset({left: field.width() / 2 - $('#gameResult').width() / 2, top: field.height() / 2 + playerSize / 2});
+    player.offset({left: field.width() / 2 - playerSize / 2, top: field.height() / 2 - playerSize / 2 });
 }
 
 function getDevice() {
