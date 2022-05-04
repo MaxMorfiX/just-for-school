@@ -324,7 +324,7 @@ function fitToSize() {
     $('#up').offset({left: field.width() - 350, top: field.height() - 300 });
     $('#down').offset({left: field.width() - 350, top: field.height() - 200 });
     $('#mBC').width(mapSize + coinSize).height(mapSize + coinSize);
-    $('#gameResult').height(90).width(700).offset({left: field.width() / 2 - $('#gameResult').width() / 2, top: field.height() / 2 + playerSize / 2});
+    $('#gameResult').height(115).width(1100).offset({left: field.width() / 2 - $('#gameResult').width() / 2, top: field.height() / 2 + playerSize / 2});
     player.offset({left: field.width() / 2 - playerSize / 2, top: field.height() / 2 - playerSize / 2 });
 }
 
