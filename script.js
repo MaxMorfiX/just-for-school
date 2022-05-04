@@ -14,7 +14,7 @@ var decorationsCount = 100;
 var mult = Math.PI / 180;
 var oneCoinPower = 1;
 var oneFakeCoinPower = -3;
-var time = 0.00;
+var time = playTime;
 var player1Score = 0;
 var player2Score = 0;
 var buttons = {};
@@ -143,7 +143,7 @@ function cycle() {
         setTimeout(cycle, gamespeed);
     }
     
-    time = Math.floor((time + gamespeed/1000)*100)/100;
+    time = Math.floor((time - gamespeed/1000)*100)/100;
 }
 
 function rotatePlayer() {
@@ -270,8 +270,8 @@ function hitboxCheck(type) {
 
 
 function checkGameEnd() {
-    if(time >= playTime) {
-        time = 0;
+    if(time <= 0) {
+        time = playTime;
         if(currPlayer == 1) {
             currPlayer = 2;
             $('.coin, .fakeCoin, .decoration').remove();
