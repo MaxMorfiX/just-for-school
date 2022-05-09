@@ -9,7 +9,7 @@ var playerSpeed = 7;
 var playerSize = 45;
 var coinSize = 50;
 var mapSize = 2000;
-var playTime = 15;
+var playTime = 25;
 var device;
 var coinCount = 50;
 var fakeCoinCount = 10;
