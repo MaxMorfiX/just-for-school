@@ -1,7 +1,7 @@
 .field {
     position: relative;
-    width: 700px;
-    height: 400px;
+    width: 1250px;
+    height: 600px;
     z-index: 0;
     background-color: gray;
     border: none;
@@ -13,4 +13,12 @@
     z-index: 1;
     background-color: green;
     border: none;
+}
+.input {
+    position: absolute;
+    z-index: 2;
+    width: 100px;
+    height: 20px;
+    border: 3px solid black;
+    right: 3px;
 }
