@@ -70,7 +70,7 @@ function startMapFunctions() {
     $('#scorePlayer2').text(player2Score);
     player.css('background', `url('textures/player${currPlayer}.png') 100% 100%`);
     player.css('background-size', '100% 100%');
-    if (device == 'phone') {
+    if (device === 'phone') {
         $('#left').show();
         $('#right').show();
         $('#up').show();
@@ -139,7 +139,7 @@ function cycle() {
     move();
     checkBorderCol();
     
-    $('#time').text(JSON.stringify(time.toFixed(2)).replaceAll('"', ''));
+    $('#time').text(JSON.stringify(time.toFixed(2)));
     
     if(!checkGameEnd()) {
         setTimeout(cycle, gamespeed);
@@ -188,12 +188,12 @@ function move() {
     if (buttons[40]) {
         var x = Math.cos((rot + 90) * mult) * playerSpeed;
         var y = Math.sin((rot + 90) * mult) * playerSpeed;
-        $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y })
+        $('#mBC').offset({left: $('#mBC').offset().left - x, top: $('#mBC').offset().top - y });
     }
     if (buttons[38]) {
         var x = Math.cos((rot + 90) * mult) * playerSpeed;
         var y = Math.sin((rot + 90) * mult) * playerSpeed;
-        $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y })
+        $('#mBC').offset({left: $('#mBC').offset().left + x, top: $('#mBC').offset().top + y });
     }
     if (buttons[40] || buttons[38]) {
         hitboxCheck('coin');
