@@ -1,0 +1,37 @@
+body {
+    color: black;
+    font-size: 16px;
+    font-family: Arial
+}
+div {
+    background-color: brown;
+}
+.shadow {
+    color: #DBDBDB;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 80px;
+    line-height: 270px;
+    font-family: Arial
+}
+.text {
+    color: red;
+    margin-top: -230px;
+    font-size: 70px;
+    line-height: 250px;
+    font-family: Arial
+}
+.class1 {
+    color: black;
+    margin-top: -50px;
+    font-size: 50px;
+    line-height: 65px;
+    font-family: cursive;
+}
+.class2 {
+    color: green;
+    margin-top: 30px;
+    font-size: 35px;
+    line-height: 45px;
+    font-family: fantasy;
+}
